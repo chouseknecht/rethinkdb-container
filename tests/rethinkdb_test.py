@@ -8,6 +8,6 @@ rdb.db_create('test').run()
 rdb.db('test').table_create('tv_shows').run()
 rdb.table('tv_shows').insert({ 'name': 'Star Trek TNG' }).run()
 
-cursor = r.table("tv_shows").run()
+cursor = rdb.table("tv_shows").run()
 for doc in cursor:
     json.dumps(doc, indent=4, separators=(',', ': '))
