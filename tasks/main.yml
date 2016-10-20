@@ -27,10 +27,45 @@
     group: root
     mode: 0664
 
-- name: Install rethinkdb
+- name: Install epel
   yum:
-    name: rethinkdb
+    name: epel-release
     state: present
+
+- name: Install yum packages 
+  yum:
+    name: "{{ item }}" 
+    state: present
+  with_items:
+    - rethinkdb
+    - ansible
 
 - name: Clean the yum cache
   command: yum clean all
+
+- name: Create user
+  user:
+    name: rethink
+    uid: 1000
+    group: root
+
+- name: Create the data directory
+  file:
+    path: /data
+    state: directory 
+    owner: rethink 
+    group: root
+    mode: 0775
+
+- name: Clean the data directory 
+  command: rm -rf 
+  args:
+    chdir: /data
+
+- name: Copy entrypoint
+  template:
+    src: entrypoint.j2.sh
+    dest: /usr/bin/entrypoint.sh
+    owner: root
+    group: root 
+    mode: 0775
