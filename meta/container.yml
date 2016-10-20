@@ -2,7 +2,7 @@ rethinkdb:
    image: "centos:7"
    working_dir: /data
    command: ["rethinkdb", "--bind", "all"]
-   expose:
-     - 28015
-     - 29015
-     - 8080
+   ports:
+     - 28015:28015
+     - 29015:29015
+     - 8080:8080
