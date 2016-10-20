@@ -4,6 +4,7 @@ import rethinkdb as rdb
 import json 
 
 rdb.connect('localhost', 28015).repl()
+rdb.db_create('test').run()
 rdb.db('test').table_create('tv_shows').run()
 rdb.table('tv_shows').insert({ 'name': 'Star Trek TNG' }).run()
 

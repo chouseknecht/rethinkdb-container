@@ -1,8 +1,9 @@
 rethinkdb:
    image: "centos:7"
-   working_dir: /data
+   working_dir: /
    command: ["rethinkdb", "--bind", "all", "--directory", "/data"]
    entrypoint: ["/usr/bin/entrypoint.sh"]
+   user: rethink
    ports:
      - 28015:28015
      - 29015:29015
