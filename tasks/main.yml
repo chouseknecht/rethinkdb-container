@@ -1,0 +1,36 @@
+---
+- name: Set the machine from facts, if available  
+  set_fact:
+    machine: "{{ ansible_machine }}"
+  when: "ansible_machine is defined"
+
+- name: Run uname -m, if facts not available
+  command: uname -m
+  register: output
+  when: "ansible_machine is not defined"
+
+- name: Set the machine, if facts not available
+  set_fact:
+    machine: "{{ output.stdout }}"
+  when: "ansible_machine is not defined"   
+
+- name: Should have a machine name
+  assert:
+    that:
+      - "machine is defined" 
+
+- name: Configure the rethinkdb repo 
+  get_url:
+    url: "http://download.rethinkdb.com/centos/7/{{ machine }}/rethinkdb.repo"
+    dest: /etc/yum.repos.d/rethinkdb.repo  
+    owner: root
+    group: root
+    mode: 0664
+
+- name: Install rethinkdb
+  yum:
+    name: rethinkdb
+    state: present
+
+- name: Clean the yum cache
+  command: yum clean all
