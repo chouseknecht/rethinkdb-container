@@ -1,0 +1,18 @@
+- hosts: localhost 
+  gather_facts: no
+  connection: local  
+  tasks:
+    - name: Wait for the database
+      wait_for:
+        host: 0.0.0.0
+        port: 28015        
+        delay: 10
+        timeout: 60
+  
+    - name: Run python test script
+      command: ./rethinkdb_test.py 
+      register: output
+
+    - name: Show the results
+      debug:
+        var: output
