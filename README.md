@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/chouseknecht/rethinkdb-container.svg?branch=master)](https://travis-ci.org/chouseknecht/rethinkdb-container)
 
-Adds a [rethinkdb](https://rethinkdb.com) service to your [Ansible Container](https://github.com/ansible-container) project.
+Adds a [rethinkdb](https://rethinkdb.com) service to your [Ansible Container](https://github.com/ansible/ansible-container) project.
 
 To add the servcie to your project, simply do the following:
 
