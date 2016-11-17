@@ -42,7 +42,7 @@ None.
 
 ## License
 
-Apache v2
+[Apache v2](https://www.apache.org/licenses/LICENSE-2.0)
 
 ## Author Information
 
